@@ -1,0 +1,4 @@
+<!--#set var="mygrades" value="dummy" -->
+<!--#include file="student_report_before_data.shtml" -->
+<!--#include file="mygrades.php" -->
+<!--#include file="student_report_after_data.shtml" -->

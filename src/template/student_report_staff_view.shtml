@@ -1,0 +1,4 @@
+<!--#set var="staffsite" value="dummy" -->
+<!--#include virtual="../../student_report_before_data.shtml" -->
+<!--#include virtual="data/#CONTENT#.js" -->
+<!--#include virtual="../../student_report_after_data.shtml" -->

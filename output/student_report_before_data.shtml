@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--#include file="include.metadata.shtml"-->
+    <title>6.042 Grade Report</title>
+    <script type='text/javascript' src='http://www.google.com/jsapi'></script>
+    <script type='text/javascript'>
+      google.load('visualization', '1', {packages:['table', 'columnchart']});
+      google.setOnLoadCallback(callback);
+      
+      /** data goes here **/
+      var grades = {};var titles = {};
