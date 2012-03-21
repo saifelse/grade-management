@@ -1,0 +1,8 @@
+The grade management system was originally written by Rich Chan,
+and modified by Oscar Moll.
+
+The software uses Google Docs as the database, whose structure I will
+later document.
+
+It is intended that the project be cleaned up. However, ultimately
+it will be replaced by a more sophisticated system.
