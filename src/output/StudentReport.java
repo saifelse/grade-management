@@ -99,7 +99,7 @@ public class StudentReport {
         if (type == GradeType.CP) {
 //        if (type == GradeType.R) {
 //            cols.add("{id: 'makeup', label: 'pending makeup', type: 'string'}");
-        } else if (type == GradeType.MQ || type == GradeType.PS || type == GradeType.F) {
+        } else if (type == GradeType.MQ || type == GradeType.PS || type == GradeType.F || type == GradeType.M) {
 //        } else if (type == GradeType.Q || type == GradeType.PS) {
             cols.add("{id: 'statistics', label: 'statistics', type: 'string'}");
         }
@@ -121,6 +121,8 @@ public class StudentReport {
                    			statistics = "<a href=\"/6.042/spring12/stats/MQ.html\">link</a>";
                    		} else if(Constants.getGradeType(entry.getKey()) == GradeType.F){
                    			statistics = "<a href=\"/6.042/spring12/stats/F.html\">link</a>";
+                   		} else if(Constants.getGradeType(entry.getKey()) == GradeType.M){
+                   			statistics = "<a href=\"/6.042/spring12/stats/M.html\">link</a>";
                    		}
             		}
             

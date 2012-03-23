@@ -391,6 +391,8 @@ public class GradesMgmt_shtml {
             }
         }
         // Compute final grade / total
+        double midtermValue = 0.0;
+        double midtermMax = 0.0;
         double finalGradeValue = 0.0;
         double finalGradeMax = 0.0;
         for(Iterator<Grade> it = aux.actualGrades.values().iterator(); it.hasNext();){
@@ -399,7 +401,10 @@ public class GradesMgmt_shtml {
         		finalGradeValue += g.value;
         		finalGradeMax += Constants.getFinalPartMax(g.key);
         	}
-        	//TODO: add similar feature for midterm?
+        	if(g.gradeType == GradeType.M){
+        		midtermValue += g.value;
+        		midtermMax += Constants.getGradeMax(g);
+        	}
         }
         
         // Adjust pset grades according to final (soft pset grades)
@@ -410,10 +415,18 @@ public class GradesMgmt_shtml {
                 if (GradeType.PS == g.gradeType && !g.isExcused) {
                     double grade = g.value;
                     double makeUpMax = Math.min(Constants.getGradeMax(g) - grade, Constants.getGradeMax(g)/2);
-                    
-                    if (finalGradeValue > 0.0) { // if the final has been taken.
-                        double bonus = finalGradeValue / finalGradeMax * makeUpMax;
-                        grade += bonus;
+                    if(Constants.getPsetNumber(g) < 6){
+                    	// Midterm
+                    	if(midtermValue > 0.0){
+                    		double bonus = midtermValue / midtermMax * makeUpMax;
+                    		grade += bonus;
+                    	}
+                    } else {
+                    	// Final
+	                    if (finalGradeValue > 0.0) { // if the final has been taken.
+	                        double bonus = finalGradeValue / finalGradeMax * makeUpMax;
+	                        grade += bonus;
+	                    }
                     }
                     g.value = grade;
                 }

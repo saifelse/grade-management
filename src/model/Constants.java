@@ -59,7 +59,9 @@ public class Constants {
     		throw new RuntimeException("no weight defined for (update Constants.java to change it) " + finalKey);
     	}
     }
-    
+    public static int getPsetNumber(Grade pset){	
+    	return Integer.parseInt(pset.key.substring(3)); 
+    }
     /*
     public static Double getMQNumberWeight(String mqkey){	
     	Integer mqnum = Integer.parseInt(mqkey.substring(3)); 

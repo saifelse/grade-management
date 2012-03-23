@@ -201,7 +201,7 @@ public class ProblemsStatsMgmt3 {
     }
     
     private static String getSetKey(String key) {
-        return key.substring(0, key.indexOf("."));
+    	return key.substring(0, key.indexOf("."));
     }
     
     private List<Double> getOrInitGrades(String key, String problemKey) {
