@@ -9,6 +9,21 @@
       }
       
       function callback() {
+        if (error) {
+              document.getElementById('title').innerHTML = "6.042 Grade Report</span>";
+              document.getElementById('timestamp').innerHTML = timestamp || "";
+              document.getElementById('psets_div').removeNode();
+              document.getElementById('f_div').removeNode();
+              document.getElementById('m_div').removeNode();
+       	      document.getElementById('cp_div').removeNode();
+              document.getElementById('mq_div').removeNode();
+              document.getElementById('mrq_div').removeNode();
+              document.getElementById('read_div').removeNode();
+              document.getElementById('tp_div').removeNode();
+              document.getElementById('total_div').removeNode();
+              return;
+      	}
+      	  
         document.getElementById('title').innerHTML = "6.042 Grade Report for <i style=\"color: #663\">" + name + "</span>";
         document.getElementById('timestamp').innerHTML = timestamp || "";
         
@@ -17,6 +32,7 @@
         drawTable(M_grades, document.getElementById('m_div'));
         drawTable(CP_grades, document.getElementById('cp_div'));
         drawTable(MQ_grades, document.getElementById('mq_div'));
+        drawTable(MRQ_grades, document.getElementById('mrq_div'));
         drawTable(RC_grades, document.getElementById('read_div'));
         drawTable(T_grades, document.getElementById('tp_div'));
         drawTable(total_grades, document.getElementById('total_div'));
@@ -107,6 +123,10 @@
         <div class="grade_table_container">
           <h2>Mini Quizzes</h2>
           <div id='mq_div'></div>
+        </div>
+        <div class="grade_table_container">
+          <h2>Micro Quizzes</h2>
+          <div id='mrq_div'></div>
         </div>
         <div class="grade_table_container">
           <h2>Reading Assignments</h2>

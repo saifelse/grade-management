@@ -67,7 +67,7 @@ public class GradesMgmt_shtml {
             return;
         }
         
-        boolean isDropping = false;
+        boolean isDropping = true;
         boolean isSoftPsetGrade = true;
         GradesMgmt_shtml gm = new GradesMgmt_shtml(isDropping, isSoftPsetGrade, 2.0);
         try {
@@ -439,11 +439,16 @@ public class GradesMgmt_shtml {
             dropLowestGradeForType(aux, GradeType.MQ);
             dropLowestGradeForType(aux, GradeType.CP);
             dropLowestGradeForType(aux, GradeType.CP);
+            dropLowestGradeForType(aux, GradeType.CP);
+            dropLowestGradeForType(aux, GradeType.MRQ);
+            dropLowestGradeForType(aux, GradeType.MRQ);
+            dropLowestGradeForType(aux, GradeType.MRQ);
         }
         
         // Replace excused grades with average grades.
         makeExcusedGradesAverage(aux, GradeType.PS);
         makeExcusedGradesAverage(aux, GradeType.MQ);
+        makeExcusedGradesAverage(aux, GradeType.MRQ);
         makeExcusedGradesMax(aux, GradeType.CP);
         
         // Get max by GradeType
@@ -499,6 +504,41 @@ public class GradesMgmt_shtml {
     	}
     }
     private static void makeExcusedGradesAverage(StudentAux aux, GradeType type){
+    	
+    	double tot = 0.0;
+    	double max = 0.0;
+    	double avg;
+    	for(Grade g : aux.actualGrades.values()){ 
+    		if(g.gradeType != type) continue;
+    		if(g.dropped || g.isExcused) continue;
+    		
+    		// Determine the average
+    		
+    		if (g.gradeType != GradeType.PS){
+	    		tot += g.value;
+	    		max += Constants.getGradeMax(g);
+    		} else {
+    			tot += g.value/Constants.getGradeMax(g)*Constants.getGradeTMax(g.gradeType);
+    			max += Constants.getGradeTMax(g.gradeType);
+    		}
+    	}
+    	
+    	avg = tot/max;
+    	
+    	//Set excused grades to average
+    	for(Grade g : aux.actualGrades.values()){ 
+    		if(g.gradeType != type) continue;
+    		if(g.dropped) continue;
+    		if(g.isExcused){
+    			if (g.gradeType != GradeType.PS){
+    				g.value = avg * Constants.getGradeMax(g);
+    			} else {
+    				g.value = avg * Constants.getGradeMax(g);///Constants.getGradeTMax(g.gradeType);
+    			}
+    		}
+    	}
+    	
+    	/*
     	double sum = 0.0;
     	int count = 0;
     	//Compute average
@@ -529,6 +569,7 @@ public class GradesMgmt_shtml {
     			}
     		}
     	}
+    	*/
     }
     
     private static void dropLowestGradeForType(StudentAux aux, GradeType type) {
@@ -550,7 +591,7 @@ public class GradesMgmt_shtml {
     private static String getLowestPsetScore(StudentAux aux){
     	Grade lowest = null;
     	for (Grade g : aux.actualGrades.values()){
-    		if (g.gradeType == GradeType.PS && g.dropped == false) {
+    		if (g.gradeType == GradeType.PS && g.dropped == false && g.isExcused == false) {
     				if (lowest == null || g.value/Constants.getGradeMax(g) < lowest.value/Constants.getGradeMax(lowest)){
     					lowest = g;
     				}
@@ -563,7 +604,9 @@ public class GradesMgmt_shtml {
     	assert(type != GradeType.PS);
         Grade lowest = null;
         for (Grade g : aux.actualGrades.values()) {
-            if (g.gradeType == type && g.dropped == false && g.isExcused == false) {
+            if (g.gradeType == type && g.dropped == false && g.isExcused == false
+            	&& !(type == GradeType.MQ && Constants.getGradeMax(g) == 5)){
+            	// && !(type == GradeType.CP && Constants.getGradeMax(g) != 2.0)){
                 if (lowest == null || g.value < lowest.value) {
                     lowest = g;
                 }

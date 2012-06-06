@@ -113,9 +113,15 @@ public class StaffReport {
                     Helpers.addSingleQuote(Helpers.gradeDecimalformat.format(s.aux.typeTotals.get(GradeType.M))), 
                     "{style: 'width: 100px'}")));
             rowCols.add(Helpers.writeJSMap(Helpers.vfp(
+                    Helpers.gradeDecimalformat.format(s.aux.typeTotals.get(GradeType.MRQ)), 
+                    Helpers.addSingleQuote(Helpers.gradeDecimalformat.format(s.aux.typeTotals.get(GradeType.MRQ))), 
+                    "{style: 'width: 100px'}")));
+
+            rowCols.add(Helpers.writeJSMap(Helpers.vfp(
                     Helpers.gradeDecimalformat.format(s.aux.grandTotal * 100.0), 
                     Helpers.addSingleQuote(Helpers.gradeDecimalformat.format(s.aux.grandTotal * 100.0)), 
                     "{style: 'width: 100px'}")));
+            
             rowCols.add(Helpers.writeJSMap(Helpers.vfp(
                     String.valueOf(s.aux.rank), 
                     null, 

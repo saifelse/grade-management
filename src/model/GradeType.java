@@ -2,5 +2,5 @@
 package model;
 
 public enum GradeType {
-    PS, F, CP, MQ, RC, T, M;
+    PS, F, CP, MQ, RC, T, M, MRQ;
 }

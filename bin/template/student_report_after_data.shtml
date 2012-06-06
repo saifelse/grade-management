@@ -17,6 +17,7 @@
         drawTable(M_grades, document.getElementById('m_div'));
         drawTable(CP_grades, document.getElementById('cp_div'));
         drawTable(MQ_grades, document.getElementById('mq_div'));
+        drawTable(MRQ_grades, document.getElementById('mrq_div'));
         drawTable(RC_grades, document.getElementById('read_div'));
         drawTable(T_grades, document.getElementById('tp_div'));
         drawTable(total_grades, document.getElementById('total_div'));
@@ -25,6 +26,7 @@
         drawTable(F_grades, document.getElementById('f_div'));
         drawTable(R_grades, document.getElementById('cp_div'));
         drawTable(Q_grades, document.getElementById('mq_div'));
+        drawTable(MRQ_grades, document.getElementById('mrq_div'));
         drawTable(total_grades, document.getElementById('total_div'));
         */
         var quadtile_end = Math.min(total_grades_quadtile.num, total_grades_quadtile.start + total_grades_quadtile.quadrantSize - 1);
@@ -107,6 +109,10 @@
         <div class="grade_table_container">
           <h2>Mini Quizzes</h2>
           <div id='mq_div'></div>
+        </div>
+        <div class="grade_table_container">
+          <h2>Microquizzes</h2>
+          <div id='mrq_div'></div>
         </div>
         <div class="grade_table_container">
           <h2>Reading Assignments</h2>

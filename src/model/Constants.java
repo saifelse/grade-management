@@ -14,6 +14,10 @@ public class Constants {
 		return maxValue.get(t.toString());
 	}
 	public static Double getGradeMax(Grade g){
+		if(g.gradeType == GradeType.F){
+			return getFinalPartMax(g.key);
+		}
+		
 		if(maxValue.containsKey(g.key)){
 			return maxValue.get(g.key);
 		}else{
@@ -51,8 +55,8 @@ public class Constants {
     */
     
     public static Double getFinalPartMax(String finalKey){	
-    	Integer partNum = Integer.parseInt(finalKey.substring(2)); 
-    	double[] finalWeights = new double[]{9,8,8,6,7,6,7,7,6,6,6,7,8,9};
+    	Integer partNum = Integer.parseInt(finalKey.substring(2));   	
+    	double[] finalWeights = new double[]{8,7,6,8,7,8,7,8,8,11,6,8,4,4};
     	try {
 	    	return finalWeights[partNum-1];
     	}catch(Exception E){
@@ -107,10 +111,12 @@ public class Constants {
             return 0.20;
         case MQ:
             return 0.10;
+        case MRQ:
+        	return 0.025;
         case M:
         	return 0.10;
         case RC:
-            return 0.05;
+            return 0.025;
         case T:
             return 0.05;
         }
@@ -125,6 +131,8 @@ public class Constants {
             return "Final Exam";
         case MQ:
             return "Miniquiz";
+        case MRQ:
+        	return "Microquiz";
         case M:
         	return "Midterm Exam";
         case PS:
@@ -139,7 +147,7 @@ public class Constants {
 
     public static GradeType getGradeType(String key) {
         for (GradeType t : GradeType.values()) {
-            if (key.startsWith(t.name())) {
+            if (key.startsWith(t.name()+".")) {
                 return t;
             }
         }
