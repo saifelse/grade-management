@@ -6,3 +6,33 @@ later document.
 
 It is intended that the project be cleaned up. However, ultimately
 it will be replaced by a more sophisticated system.
+
+TODOs
+=========
+
+Database
+--------
+Grades will be stored in a sql/sqlite database... this allows for easy backup, more granular permissions, and is much cleaner than Google Docs.
+
+Grade Generator
+---------------
+This will still be in Java, but it will use the database instead of downloading Google Docs.
+
+Build System
+-------------
+Using Make: this will allow anyone to use the grade management system fairly easily.
+
+  make jar: compiles the java code into a jar.
+  make backup: back up the database with a timestamp
+  make stats: generates histograms (should be able to specify target)
+  make reports: generates (private) grade files.
+  make publish: move reports to online accessible page.
+  make clean: deletes all generated files
+
+
+
+Switch from SHTML to PHP?
+-------------------------
+SHTML only allows server-side includes. Being able to include a student's grade report based on a certificate is very hacky. PHP offers server-side includes as well as more functionality that makes this task very easy.
+
+Maybe we can also take a second to do some CSS styling on the website :D
